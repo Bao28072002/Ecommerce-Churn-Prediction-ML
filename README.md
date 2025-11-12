@@ -655,7 +655,157 @@ The model demonstrates **good overall Accuracy (86.4%)**. However, **Precision (
 ---
 
 ## 🧑‍💻 Customer Segmentation Using Clustering
-Phân khúc khách hàng dựa trên hành vi và đặc điểm chung.
 
+### 📝 **PCA**
+
+[In 15]
+
+```python
+# One-hot encoding
+df_churned_encoded = pd.get_dummies(df_churned,
+                                    columns=['PreferredLoginDevice', 'PreferredPaymentMode', 'PreferedOrderCat', 'MaritalStatus'])
+# Label encoding
+le = LabelEncoder()
+df_churned_encoded.loc[:, 'Gender'] = le.fit_transform(df_churned_encoded['Gender'])
+
+scaler = RobustScaler()
+df_churned_final = scaler.fit_transform(df_churned_encoded)
+
+pca = PCA(n_components=0.90)
+pca_final = pca.fit_transform(df_churned_final)
+print(f'Number of principal components retained: {pca_final.shape[1]}')
+pca.explained_variance_ratio_
+
+```
+
+[Out 15]:
+
+<img width="412" height="83" alt="image" src="https://github.com/user-attachments/assets/279acfc7-686a-431d-bfdf-9e819e0918a2" />
+
+
+### 📝 **Apply Model & Clustering**
+
+**Step 1: Choosing K**
+
+[In 16]:
+
+```python
+#Calculate KMeans
+from sklearn.cluster import KMeans
+ss = []
+for i in range(1,11):
+  kmeans = KMeans(n_clusters=i, n_init=10, random_state=42, init='k-means++')
+  kmeans.fit(pca_df)
+  ss.append(kmeans.inertia_)
+
+#Plot the Elbow
+plt.figure(figsize = (6,4))
+plt.plot(range(1,11), ss, marker=0, linestyle='--')
+plt.title('Elbow Methos')
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS')
+plt.show()
+```
+
+[Out 16]:
+
+<img width="422" height="301" alt="image" src="https://github.com/user-attachments/assets/2e5518d8-8863-41fd-937f-b7229ebc55ee" />
+
+
+-> We will choose **K=4**
+
+**Step 2: Apply Model**
+
+```python
+kmeans = KMeans(n_clusters=4, n_init=10, init='k-means++')
+predicted_labels = kmeans.fit_predict(pca_df)
+pca_df['cluster'] = predicted_labels
+df_churned_encoded['cluster'] = predicted_labels
+df_churned['cluster'] = predicted_labels
+```
+
+**Step 3: Evaluate Model**
+
+[In 17]:
+
+```python
+sil_score = silhouette_score(pca_df, predicted_labels)
+print(sil_score)
+```
+
+[Out 1717]: 0.2041913600255242
+
+**Step 4: Visulize Distribution & Clusters**
+
+<img width="488" height="348" alt="image" src="https://github.com/user-attachments/assets/f678cca8-5f81-46d4-9774-2e1c564cc8c1" />
+
+<img width="555" height="425" alt="image" src="https://github.com/user-attachments/assets/e20d0b2e-9630-4134-b6bc-1397ea643315" />
+
+
+
+### **💡Conclusion: **
+- **PCA does not retain the significant meaning of the data** (the sum of the explained variance ratio is too low).
+- When applying the **Elbow method**, no clear elbow points are visible.
+- **Our hypothesis** is that the data is **sporadic**, meaning there are no clear patterns between the data points, and therefore, clustering into distinct groups is challenging.
+- **Silhouette score is also low**, indicating that the clusters are not well-separated.
+
+### **💡Suggestions:**
+- **Use clustering methods that do not require a fixed number of clusters**. We suggest trying a **Hierarchical Clustering model**, which can provide better-defined clusters without the need to predefine the number of clusters.
+
+**Step 5: Apply Dendrogram**
+
+[In 18]:
+
+```python
+X_pca = pca_df.values
+
+# Draw dendrogram
+plt.figure(figsize=(8, 5))
+dendrogram = sch.dendrogram(sch.linkage(X_pca, method='ward'))
+plt.axhline(y=6, color='r', linestyle='--')
+plt.show()
+```
+
+[Out 18]:
+
+<img width="540" height="334" alt="image" src="https://github.com/user-attachments/assets/7090aad5-b3d0-43ef-82cd-1ae492c72457" />
+
+
+**Step 6: Evaluate Dendrogram**
+
+[In 19]:
+```python
+# Apply Agglomerative Clustering with 4 clusters
+agg_clustering = AgglomerativeClustering(n_clusters=4)
+clusters = agg_clustering.fit_predict(pca_df)
+
+# Calculate the Silhouette Score
+sil_score = silhouette_score(pca_df, clusters)
+print(f"Silhouette Score: {sil_score}")
+
+# Visualize the clusters (if pca_df is 2D or 3D)
+plt.scatter(pca_df.iloc[:, 0], pca_df.iloc[:, 1], c=clusters, cmap='viridis')
+plt.title('Agglomerative Clustering Results')
+plt.xlabel('PCA 1')
+plt.ylabel('PCA 2')
+plt.show()
+```
+
+[Out 19]:
+
+<img width="458" height="336" alt="image" src="https://github.com/user-attachments/assets/3400a53a-21ec-4b85-a836-9551357e70f9" />
+
+
+Silhouette Score:  0.2644519772640823 -> **too low**
+
+## 7️⃣ **Recommendation for Clustering**
+
+- **Gather more data on churned users**:  
+  - To improve the model, we can **collect additional data** on churned users, either by gathering real data from the business or by using our **supervised model to predict churn**. The predicted churn data can serve as ground truth for refining the clustering model.
+  
+- **Run promotions for churned users**:  
+  - **Offer promotions** to all users identified as churned, and **track the results**. These insights can be used as **additional features** in future models, helping to enhance the accuracy and effectiveness of churn prediction over time.
+
+These steps would help **improve data quality** and **increase the predictive power** of the model by incorporating real-world results and feedback.
 
 
