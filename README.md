@@ -17,7 +17,7 @@
 5. 📊 [Train & Apply Churn Prediction Model](#-train--apply-churn-prediction-model)  
 6. 💡 [Key Findings and Recommendations for Retention](#-key-findings-and-recommendations-for-retention)  
 7. 🤖 [Create A Model For Predicting Churn](#-create-a-model-for-predicting-churn)  
-8. 🧑‍💻 [Customer Segmentation Using Clustering](#-customer-segmentation-using-clustering)  
+8. 🧑‍💻 [Customer Segmentation Using Clustering](#-customer-segmentation-using-clustering) 
 
 ---
 
