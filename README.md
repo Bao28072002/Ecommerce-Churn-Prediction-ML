@@ -333,7 +333,8 @@ df_encoded['Gender'] = label_encoder.fit_transform(df_encoded['Gender'])
 
 [Out 11]:
 
-<img width="1770" height="300" alt="image" src="https://github.com/user-attachments/assets/019f2613-50e9-4391-8552-98a077065dd4" />
+<img width="886" height="388" alt="image" src="https://github.com/user-attachments/assets/2bdf4fd8-d09f-4569-8aef-e954a74117f2" />
+
 
 ### **📝 Split Data into Features (X) and Target (y)**
 
@@ -473,7 +474,7 @@ plt.show()
 ```
 [Out 11]:
 
-<img width="789" height="615" alt="image" src="https://github.com/user-attachments/assets/29a51039-8573-4721-9196-f88aecf816c5" />
+<img width="902" height="687" alt="image" src="https://github.com/user-attachments/assets/876782fd-5c03-4019-862f-a227dc775269" />
 
 ### **💡Conclusion: **
 
@@ -583,7 +584,7 @@ Since **losing a customer (FN) causes more damage** than the expense of a mistak
 | KNN                   | 0.4697       |
 | Gradient Boosting     | 0.6241     |
 
-<img width="900" height="545" alt="image" src="https://github.com/user-attachments/assets/50e87593-5a01-4285-b2cd-af786675fc77" />
+<img width="908" height="552" alt="image" src="https://github.com/user-attachments/assets/7ce24bb9-3eef-40d6-bcb9-9f832c01c1b5" />
 
 Based on the test results, the **Random Forest** model achieved the **highest Recall score**.
 
@@ -612,7 +613,8 @@ print("Best recall score:", rf_finetune.best_score_)
 
 [Out 13]: 
 
-<img width="927" height="31" alt="image" src="https://github.com/user-attachments/assets/785e9cae-a368-41a6-bfeb-991bbc70b20d" />
+<img width="901" height="62" alt="image" src="https://github.com/user-attachments/assets/6a33d904-a5a6-47a9-b437-76833843e429" />
+
 
 [In 14]: 
 
@@ -629,7 +631,7 @@ plt.show()
 ```
 [Out 14]: 
 
-<img width="525" height="424" alt="image" src="https://github.com/user-attachments/assets/ad428981-5402-4bf5-9074-cf254c386883" />
+<img width="728" height="565" alt="image" src="https://github.com/user-attachments/assets/b0af2843-b6c2-472d-83fc-58df9207aa6e" />
 
 | Predicted Class | Not Churn | Churn | Interpretation |
 | :--- | :---: | :---: | :--- |
