@@ -504,6 +504,13 @@ This will help us **identify patterns** and **understand** how these features co
 
 ## 📉 Churn Feature Insights
 
+<img width="883" height="732" alt="image" src="https://github.com/user-attachments/assets/a8ca1a97-93dc-4e96-96ed-3e034d58c388" />
+
+<img width="904" height="723" alt="image" src="https://github.com/user-attachments/assets/89d663c1-e29c-4eb9-938d-4010052d7e0f" />
+
+<img width="884" height="372" alt="image" src="https://github.com/user-attachments/assets/b068d3ae-7685-4587-ab8e-2d13945b00dc" />
+
+
 | Metric | Churn (Blue) | Non-Churn (Red) | Insight |
 | :--- | :--- | :--- | :--- |
 | **Tenure** (Customer Lifetime) | 80% left within 5 months, very few stayed beyond 10 months | More evenly distributed, many customers stayed over 20 months | **Churning customers leave very early**, meaning the initial experience is crucial. Without effective retention strategies, they leave quickly. |
