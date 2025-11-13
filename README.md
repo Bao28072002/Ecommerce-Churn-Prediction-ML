@@ -1,6 +1,7 @@
 # Churn Prediction & Segmentation For Retention Strategy For Ecommerce | Machine Learning - Python
 
-<img width="1024" height="640" alt="image" src="https://github.com/user-attachments/assets/c502cb1a-4cef-4f1e-a16b-d2d22b2656be" />
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/57237cd2-169b-4b3f-9d2c-4954676a93ff" />
+
 
 **Author:** Lê Gia Bảo
 
